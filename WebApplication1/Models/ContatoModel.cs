@@ -8,5 +8,9 @@ namespace WebApplication1.Models
     public class ContatoModel
     {
         public DateTime DatadeNascimento { get; set; }
+
+        public string Palavra { get; set; }
+
+
     }
 }

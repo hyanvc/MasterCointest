@@ -9,6 +9,21 @@ namespace WebApplication1.Controllers
 {
     public class ContatoController : Controller
     {
+
+        public static string InverteString(string s)
+        {
+            char[] arr = s.ToCharArray();
+            Array.Reverse(arr);
+            return new string(arr);
+        }
+
+
+        public IActionResult Inverter()
+        {
+            return View();
+        }
+
+
         public IActionResult Index()
         {
             return View();
@@ -18,7 +33,25 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
-        
+
+
+        [HttpPost]
+        public IActionResult Inverter(ContatoModel palavras)
+        {
+            string texto = palavras.Palavra;
+
+            string texto1 = InverteString(texto);
+
+
+            TempData["msg"] =  "Sua palavra invertida é: " +  texto1;
+
+
+
+
+
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Criar(ContatoModel contato)
         {
