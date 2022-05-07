@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Descobrir Idade";
+    @model ContatoModel
+    
+}
+
+<form asp-controller="Contato" asp-action="Criar" method="post">
+    <div id="mensagem" class="form-group">
+        <label for="nome">Verificando Idade da Pessoa</label>
+        <input type="text" asp-for="DatadeNascimento" class="form-control" placeholder="Insira sua data de Nascimento, Ex: 10/09/1990">
+        @TempData["msg"]
+    </div>
+
+    <button type="submit" class="btn btn-primary">Adicionar</button>
+    <a class="btn btn-secondary" asp-controller="Contato" asp-action="Index" role="button">Voltar</a>
+</form> 
