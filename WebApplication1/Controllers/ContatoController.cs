@@ -13,6 +13,12 @@ namespace WebApplication1.Controllers
     public class ContatoController : Controller
     {
 
+        private readonly IContatoRepositorio _contatoRepositorio;
+        public ContatoController(IContatoRepositorio contatoRepositorio)
+        {
+            _contatoRepositorio = contatoRepositorio;
+        }
+
         public static string InverteString(string s)
         {
             char[] arr = s.ToCharArray();
@@ -75,11 +81,6 @@ namespace WebApplication1.Controllers
 
             return View();
 
-
-        //https://api.hgbrasil.com/finance?array_limit=1&fields=only_results,USD&key=12234bfa
-
-
-
         }
 
         [HttpPost]
@@ -106,6 +107,16 @@ namespace WebApplication1.Controllers
 
 
                 }
+            }
+
+
+            [HttpPost]
+            public IActionResult Criar2(ContatoTable contato)
+            {
+                _contatoRepositorio.Adicionar(contato);
+
+                return RedirectToAction("Index");
+
             }
 
             return View();
