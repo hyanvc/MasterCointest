@@ -15,5 +15,9 @@ namespace WebApplication1.Models
 
         public string Celular { get; set; }
 
+        public string Senha { get; set; }
+
+        public string DataDeNascimento { get; set; }
+
     }
 }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using WebApplication1.Models;
 
@@ -124,16 +125,34 @@ namespace WebApplication1.Controllers
 
                 return View();
 
-
             }
         }
-
         [HttpPost]
         public IActionResult Criar2(ContatoTable contato)
         {
+
+            if (contato.Name.Contains("mc") ||
+              (contato.Name.Contains("mastercoin")))
+            {
+
+
+                TempData["nome"] = ("Seu Nome de Usuario Nao Pode Conter  mc/mastercoin");
+                return RedirectToAction("CriarUsuario");
+            }
+
+            Regex rx = new Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{6,32}$");
+            Match match = rx.Match(contato.Senha);
+
+            if (!match.Success)
+            {
+
+
+                TempData["nome"] = ("A senha deve conter, no mínimo, uma letra maiúscula, uma letra minúscula e um número A mesma não pode ter nenhum caractere de pontuação, acentuação ou espaço Além disso, a senha pode ter de 6 a 32 caracteres  ");
+                return RedirectToAction("CriarUsuario");
+            }
             _contatoRepositorio.Adicionar(contato);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index1");
 
         }
 

@@ -19,20 +19,23 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Celular</th>
+            <th scope="col">Data de Nascimento</th>
         </tr>
     </thead>
     <tbody>
         @if (Model != null && Model.Any())
             foreach (ContatoTable item in Model)
             {
-                <tr>
+        <tr>
             <th scope="@item.Id">1</th>
             <td>@item.Name</td>
             <td>@item.Email</td>
             <td>@item.Celular</td>
+            <td>@item.DataDeNascimento</td>
+
         </tr>
             }
         }

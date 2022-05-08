@@ -8,15 +8,26 @@
 <form asp-controller="Contato" asp-action="Criar2" method="post">
     <div id="mensagem" class="form-group">
         <label for="nome">Nome</label>
-        <input type="text" asp-for="Name" class="form-control" placeholder="Insira seu Nome de Usuario">
+        <input type="text" asp-for="Name" class="form-control" required placeholder="Insira seu Nome de Usuario">
+        @TempData["nome"]
     </div>
     <div id="mensagem" class="form-group">
         <label for="nome">Email</label>
-        <input type="text" asp-for="Email" class="form-control" placeholder="Insira um Email com a formatação valida ex: xxx@gmail.com">
+        <input type="text" asp-for="Email" class="form-control" required placeholder="Insira um Email com a formatação valida ex: xxx@gmail.com">
+        @TempData["email"]
     </div>
     <div id="mensagem" class="form-group">
         <label for="nome">Celular</label>
-        <input type="text" asp-for="Celular" class="form-control" placeholder="Insira um numero de celular.">
+        <input type="text" asp-for="Senha" class="form-control" required placeholder="Insira uma Senha.">
+    </div>
+    <div id="mensagem" class="form-group">
+        <label for="nome">Celular</label>
+        <input type="number" asp-for="Celular" class="form-control" required placeholder="Insira um numero de celular.">
+    </div>
+
+    <div id="mensagem" class="form-group">
+        <label for="nome">DatadeNascimento</label>
+        <input type="date" asp-for="DataDeNascimento" class="form-control" required placeholder="Insira uma data de Nascimento.">
     </div>
 
     <button type="submit" class="btn btn-primary">Adicionar</button>
