@@ -162,13 +162,25 @@ namespace WebApplication1.Controllers
             }
 
             Regex rx = new Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{6,32}$");
+            Regex rg = new Regex(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$");
+            Match matchEmail = rg.Match(contato.Email);
             Match match = rx.Match(contato.Senha);
+
 
             if (!match.Success)
             {
 
 
-                TempData["nome"] = ("A senha deve conter, no mínimo, uma letra maiúscula, uma letra minúscula e um número A mesma não pode ter nenhum caractere de pontuação, acentuação ou espaço Além disso, a senha pode ter de 6 a 32 caracteres  ");
+                TempData["senha"] = ("A senha deve conter, no mínimo, uma letra maiúscula, uma letra minúscula e um número A mesma não pode ter nenhum caractere de pontuação, acentuação ou espaço Além disso, a senha pode ter de 6 a 32 caracteres  ");
+                return RedirectToAction("CriarUsuario");
+            }
+
+
+            if (!matchEmail.Success)
+            {
+
+
+                TempData["email"] = ("O Email Inserido é invalido. ");
                 return RedirectToAction("CriarUsuario");
             }
             _contatoRepositorio.Adicionar(contato);
