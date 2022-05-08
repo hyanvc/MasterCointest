@@ -1,4 +1,5 @@
 ﻿using MasterCoinTest.Models;
+using MasterCoinTest.Repositorio;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -35,10 +36,19 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-            return View();
+
+           List<ContatoTable> contatos =_contatoRepositorio.BuscarTodos();
+
+            return View(contatos);
         }
 
         public IActionResult Criar()
+        {
+            return View();
+        }
+
+
+        public IActionResult CriarUsuario()
         {
             return View();
         }
@@ -57,7 +67,7 @@ namespace WebApplication1.Controllers
             string texto1 = InverteString(texto);
 
 
-            TempData["msg"] =  "Sua palavra invertida é: " +  texto1;
+            TempData["msg"] = "Sua palavra invertida é: " + texto1;
 
             return View();
         }
@@ -99,29 +109,28 @@ namespace WebApplication1.Controllers
 
                     Market market = JsonConvert.DeserializeObject<Market>(result);
 
-                    decimal real = decimal.Round(cotacao.Real / market.Currency.Buy,3);
+                    decimal real = decimal.Round(cotacao.Real / market.Currency.Buy, 3);
 
                     TempData["msg"] = "A cotação atual do dolar é : " + market.Currency.Buy + " e  o valor em reais convertido do dolar é : " + real;
 
 
-
-
                 }
-            }
 
+                return View();
 
-            [HttpPost]
-            public IActionResult Criar2(ContatoTable contato)
-            {
-                _contatoRepositorio.Adicionar(contato);
-
-                return RedirectToAction("Index");
 
             }
-
-            return View();
         }
 
+        [HttpPost]
+        public IActionResult Criar2(ContatoTable contato)
+        {
+            _contatoRepositorio.Adicionar(contato);
 
+            return RedirectToAction("Index");
+
+        }
+
+           
     }
 }
