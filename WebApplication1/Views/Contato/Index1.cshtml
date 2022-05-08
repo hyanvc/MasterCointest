@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Listagem";
+}
+@model List<ContatoTable>
+
+<div class="text-center">
+    <a class="btn btn-primary" role="button" asp-controller="Contato" asp-action="Criar">Descobrir Sua Idade!</a>
+
+    <a class="btn btn-primary" role="button" asp-controller="Contato" asp-action="Inverter">Inverter Palavras!</a>
+
+    <a class="btn btn-primary" role="button" asp-controller="Contato" asp-action="Cotacao">Cotacao Dolar</a>
+
+    <a class="btn btn-primary" role="button" asp-controller="Contato" asp-action="CriarUsuario">Cadastrar usuarios </a>
+
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+            foreach (ContatoTable item in Model)
+            {
+                <tr>
+            <th scope="@item.Id">1</th>
+            <td>@item.Name</td>
+            <td>@item.Email</td>
+            <td>@item.Celular</td>
+        </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -37,7 +37,13 @@ namespace WebApplication1.Controllers
         public IActionResult Index()
         {
 
-           List<ContatoTable> contatos =_contatoRepositorio.BuscarTodos();
+            return View();
+        }
+
+        public IActionResult Index1()
+        {
+
+            List<ContatoTable> contatos = _contatoRepositorio.BuscarTodos();
 
             return View(contatos);
         }
