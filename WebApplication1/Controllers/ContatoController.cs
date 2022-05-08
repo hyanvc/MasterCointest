@@ -152,12 +152,9 @@ namespace WebApplication1.Controllers
         public IActionResult Criar2(ContatoTable contato)
         {
 
-            if (contato.Name.Contains("mc") ||
-              (contato.Name.Contains("mastercoin")))
-            {
-
-
-                TempData["nome"] = ("Seu Nome de Usuario Nao Pode Conter  mc/mastercoin");
+            if (contato.Name.Contains("mc") || (contato.Name.Contains("mastercoin")))
+            { 
+            TempData["nome"] = ("Seu Nome de Usuario Nao Pode Conter  mc/mastercoin");
                 return RedirectToAction("CriarUsuario");
             }
 
@@ -167,18 +164,17 @@ namespace WebApplication1.Controllers
             Match match = rx.Match(contato.Senha);
 
 
-            if (!match.Success)
-            {
+            //if (!match.Success)
+            //{
 
 
-                TempData["senha"] = ("A senha deve conter, no mínimo, uma letra maiúscula, uma letra minúscula e um número A mesma não pode ter nenhum caractere de pontuação, acentuação ou espaço Além disso, a senha pode ter de 6 a 32 caracteres  ");
-                return RedirectToAction("CriarUsuario");
-            }
+            //    TempData["senha"] = ("A senha deve conter, no mínimo, uma letra maiúscula, uma letra minúscula e um número A mesma não pode ter nenhum caractere de pontuação, acentuação ou espaço Além disso, a senha pode ter de 6 a 32 caracteres  ");
+            //    return RedirectToAction("CriarUsuario");
+            //}
 
 
             if (!matchEmail.Success)
             {
-
 
                 TempData["email"] = ("O Email Inserido é invalido. ");
                 return RedirectToAction("CriarUsuario");
