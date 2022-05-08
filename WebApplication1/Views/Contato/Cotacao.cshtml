@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Inverter Palavras!";
+    @model ContatoModel
+    
+}
+
+<form asp-controller="Contato" asp-action="Cotacao" method="post">
+    <div id="mensagem" class="form-group">
+        <label for="nome">Converter de Dolar pra Real</label>
+        <input type="number" asp-for= "Real" +  R$ class="form-control" placeholder="Insira o Valor de  Dolar ">
+        @TempData["msg"]
+    </div>
+
+    <button type="submit" class="btn btn-primary">Adicionar</button>
+    <a class="btn btn-secondary" asp-controller="Contato" asp-action="Index" role="button">Voltar</a>
+</form> 

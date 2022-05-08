@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MasterCoinTest.Models;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using WebApplication1.Models;
 
@@ -35,6 +38,11 @@ namespace WebApplication1.Controllers
         }
 
 
+        public IActionResult Cotacao()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Inverter(ContatoModel palavras)
         {
@@ -45,10 +53,6 @@ namespace WebApplication1.Controllers
 
             TempData["msg"] =  "Sua palavra invertida é: " +  texto1;
 
-
-
-
-
             return View();
         }
 
@@ -58,7 +62,7 @@ namespace WebApplication1.Controllers
             int idade = DateTime.Now.Year - contato.DatadeNascimento.Year;
 
             if
-                (DateTime.Now.DayOfYear < contato.DatadeNascimento.DayOfYear);
+                (DateTime.Now.DayOfYear < contato.DatadeNascimento.DayOfYear)
             {
                 idade = idade - 1;
             }
@@ -69,10 +73,44 @@ namespace WebApplication1.Controllers
             else
                 TempData["msg"] = "Sua idade é " + idade + "anos.";
 
-            return View();   
-            
-        
+            return View();
+
+
+        //https://api.hgbrasil.com/finance?array_limit=1&fields=only_results,USD&key=12234bfa
+
+
+
         }
+
+        [HttpPost]
+        public IActionResult Cotacao(ContatoModel cotacao)
+        {
+            string strURL = "https://api.hgbrasil.com/finance?array_limit=1&fields=only_results,USD&key=12234bfa";
+
+            using (HttpClient client = new HttpClient())
+            {
+
+                var response = client.GetAsync(strURL).Result;
+
+                if (response.IsSuccessStatusCode == true)
+                {
+                    var result = response.Content.ReadAsStringAsync().Result;
+
+                    Market market = JsonConvert.DeserializeObject<Market>(result);
+
+                    decimal real = decimal.Round(cotacao.Real / market.Currency.Buy,3);
+
+                    TempData["msg"] = "A cotação atual do dolar é : " + market.Currency.Buy + " e  o valor em reais convertido do dolar é : " + real;
+
+
+
+
+                }
+            }
+
+            return View();
+        }
+
 
     }
 }

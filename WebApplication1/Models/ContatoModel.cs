@@ -11,6 +11,8 @@ namespace WebApplication1.Models
 
         public string Palavra { get; set; }
 
+        public decimal Real { get; set; }
+
 
     }
 }
