@@ -28,6 +28,19 @@ namespace WebApplication1.Controllers
             return new string(arr);
         }
 
+        public static bool checkPalindrome(string mainString)
+        {
+            string firstHalf = mainString.Substring(0, mainString.Length / 2);
+            char[] arr = mainString.ToCharArray();
+
+            Array.Reverse(arr);
+
+            string temp = new string(arr);
+            string secondHalf = temp.Substring(0, temp.Length / 2);
+
+            return firstHalf.Equals(secondHalf);
+        }
+
 
         public IActionResult Inverter()
         {
@@ -73,8 +86,16 @@ namespace WebApplication1.Controllers
 
             string texto1 = InverteString(texto);
 
+            bool texto2 = checkPalindrome(texto);
 
-            TempData["msg"] = "Sua palavra invertida é: " + texto1;
+            if(texto2 == true)
+            {
+                TempData["palindromo"] = " sua palavra invertida é : " + texto1 + " e sua palavra é Palindromo!";
+            }
+
+
+
+            TempData["msg1"] = "Sua palavra invertida é: " + texto1;
 
             return View();
         }

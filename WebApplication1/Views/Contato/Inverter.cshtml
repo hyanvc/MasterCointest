@@ -9,11 +9,10 @@
     <div id="mensagem" class="form-group">
         <label for="nome">Verificando Idade da Pessoa</label>
         <input type="text" asp-for="Palavra" class="form-control" placeholder="Insira a Palavra que deseja descobrir o Inverso!">
-        @TempData["msg"]
+        @TempData["palindromo"]
+        @TempData["msg1"]
     </div>
 
     <button type="submit" class="btn btn-primary">Inverter</button>
     <a class="btn btn-secondary" asp-controller="Contato" asp-action="Index" role="button">Voltar</a>
 </form> 
-
-Inverter
