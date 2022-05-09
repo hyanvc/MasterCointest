@@ -55,6 +55,12 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        public IActionResult CadastradoComSucesso()
+        {
+
+            return View();
+        }
+
         public IActionResult Index1()
         {
 
@@ -163,11 +169,9 @@ namespace WebApplication1.Controllers
 
                     Market market = JsonConvert.DeserializeObject<Market>(result);
 
-                    decimal real = decimal.Round(cotacao.Real / market.Currency.Buy, 3);
+                    decimal real = decimal.Round(cotacao.Real / market.Currency.Buy, 2);
 
                     TempData["msg"] = "A cotação atual do Dólar  é : " + market.Currency.Buy + " e  o valor em reais convertido do Dólar  é : " + real;
-
-
                 }
 
                 return View();
@@ -206,7 +210,7 @@ namespace WebApplication1.Controllers
             }
             _contatoRepositorio.Adicionar(contato);
 
-            return RedirectToAction("Index1");
+            return RedirectToAction("CadastradoComSucesso");
 
         }
 
