@@ -8,10 +8,10 @@
 <form asp-controller="Contato" asp-action="Cotacao" method="post">
     <div id="mensagem" class="form-group">
         <label for="nome">Converter de Dolar pra Real</label>
-        <input type="number" asp-for= "Real" +  R$ class="form-control" placeholder="Insira o Valor de  Dolar ">
+        <input type="number" asp-for= "Real" +  required  class="form-control" placeholder="Insira o Valor de  Dolar ">
         @TempData["msg"]
     </div>
 
-    <button type="submit" class="btn btn-primary">Adicionar</button>
+    <button type="submit" class="btn btn-primary">Converter</button>
     <a class="btn btn-secondary" asp-controller="Contato" asp-action="Index" role="button">Voltar</a>
 </form> 
