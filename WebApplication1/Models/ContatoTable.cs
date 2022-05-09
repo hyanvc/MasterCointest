@@ -17,7 +17,7 @@ namespace WebApplication1.Models
 
         public string Senha { get; set; }
 
-        public string DataDeNascimento { get; set; }
+        public DateTime DataDeNascimento { get; set; }
 
     }
 }

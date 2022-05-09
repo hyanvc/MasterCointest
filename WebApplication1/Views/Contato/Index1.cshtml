@@ -18,7 +18,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col">Id</th>
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
             <th scope="col">Celular</th>
@@ -30,7 +30,7 @@
             foreach (ContatoTable item in Model)
             {
         <tr>
-            <th scope="@item.Id">1</th>
+            <td>@item.Id</td>
             <td>@item.Name</td>
             <td>@item.Email</td>
             <td>@item.Celular</td>
@@ -38,6 +38,6 @@
 
         </tr>
             }
-        }
+        
     </tbody>
 </table>
