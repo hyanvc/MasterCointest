@@ -88,38 +88,63 @@ namespace WebApplication1.Controllers
 
             bool texto2 = checkPalindrome(texto);
 
-            if(texto2 == true)
+            if (texto2 == true)
             {
                 TempData["palindromo"] = " sua palavra invertida é : " + texto1 + " e sua palavra é Palindromo!";
             }
 
+            else
 
-
-            TempData["msg1"] = "Sua palavra invertida é: " + texto1;
+                TempData["msg1"] = "Sua palavra invertida é: " + texto1;
 
             return View();
         }
 
         [HttpPost]
         public IActionResult Criar(ContatoModel contato)
+
         {
+            int bisext = contato.DatadeNascimento.Year;
+
             int idade = DateTime.Now.Year - contato.DatadeNascimento.Year;
 
+
+            
+
+            if (DateTime.IsLeapYear(bisext))
+            {
+                bisext = Convert.ToInt32(contato.DatadeNascimento.DayOfYear - 1);
+
+
+
+               if (bisext == DateTime.Today.DayOfYear)
+                TempData["msg"] = "Eba! Hoje é seu Aniversário! e sua idade é : " + idade + " e você nasceu em um ano bissexto!";
+               
+               else
+                    TempData["msg"] = "Sua idade é " + idade + "anos.";
+
+                return View();
+
+
+
+            }
+
+            if (contato.DatadeNascimento.DayOfYear == DateTime.Today.DayOfYear)
+                TempData["msg"] = "Eba! Hoje é seu Aniversário!";
+            else
+
             if
-                (DateTime.Now.DayOfYear < contato.DatadeNascimento.DayOfYear)
+                     (DateTime.Now.DayOfYear < contato.DatadeNascimento.DayOfYear)
             {
                 idade = idade - 1;
             }
-
-            if (contato.DatadeNascimento == DateTime.Now)
-                TempData["msg"] = "Eba! Hoje é seu Aniversário!";
-
             else
                 TempData["msg"] = "Sua idade é " + idade + "anos.";
 
             return View();
-
         }
+
+
 
         [HttpPost]
         public IActionResult Cotacao(ContatoModel cotacao)
@@ -153,8 +178,8 @@ namespace WebApplication1.Controllers
         {
 
             if (contato.Name.Contains("mc") || (contato.Name.Contains("mastercoin")))
-            { 
-            TempData["nome"] = ("Seu Nome de Usuario Nao Pode Conter  mc/mastercoin");
+            {
+                TempData["nome"] = ("Seu Nome de Usuario Nao Pode Conter  mc/mastercoin");
                 return RedirectToAction("CriarUsuario");
             }
 
@@ -164,13 +189,13 @@ namespace WebApplication1.Controllers
             Match match = rx.Match(contato.Senha);
 
 
-            //if (!match.Success)
-            //{
+            if (!match.Success)
+            {
 
 
-            //    TempData["senha"] = ("A senha deve conter, no mínimo, uma letra maiúscula, uma letra minúscula e um número A mesma não pode ter nenhum caractere de pontuação, acentuação ou espaço Além disso, a senha pode ter de 6 a 32 caracteres  ");
-            //    return RedirectToAction("CriarUsuario");
-            //}
+                TempData["senha"] = ("A senha deve conter, no mínimo, uma letra maiúscula, uma letra minúscula e um número A mesma não pode ter nenhum caractere de pontuação, acentuação ou espaço Além disso, a senha pode ter de 6 a 32 caracteres  ");
+                return RedirectToAction("CriarUsuario");
+            }
 
 
             if (!matchEmail.Success)
@@ -185,6 +210,6 @@ namespace WebApplication1.Controllers
 
         }
 
-           
+
     }
 }
