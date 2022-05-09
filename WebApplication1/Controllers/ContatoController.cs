@@ -139,7 +139,7 @@ namespace WebApplication1.Controllers
 
                     decimal real = decimal.Round(cotacao.Real / market.Currency.Buy, 3);
 
-                    TempData["msg"] = "A cotação atual do dolar é : " + market.Currency.Buy + " e  o valor em reais convertido do dolar é : " + real;
+                    TempData["msg"] = "A cotação atual do Dólar  é : " + market.Currency.Buy + " e  o valor em reais convertido do Dólar  é : " + real;
 
 
                 }
