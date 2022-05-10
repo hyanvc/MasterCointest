@@ -29,6 +29,7 @@
     <div id="mensagem" class="form-group">
         <label for="nome">DatadeNascimento</label>
         <input type="date" asp-for="DataDeNascimento" class="form-control" required placeholder="Insira uma data de Nascimento.">
+        @TempData["nascimento"]
     </div>
 
     <button type="submit" class="btn btn-primary">Cadastrar</button>

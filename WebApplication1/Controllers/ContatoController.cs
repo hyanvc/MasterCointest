@@ -195,6 +195,13 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("CriarUsuario");
             }
 
+            if (contato.DataDeNascimento > DateTime.Now)
+            {
+                TempData["nascimento"] = ("Sua Data de nascimento deve ser válida!");
+                return RedirectToAction("CriarUsuario");
+            }
+
+
             Convert.ToDateTime(contato.DataDeNascimento).ToString("dd/MM/yyyy");
             Regex rx = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$");
             Regex rg = new Regex(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$");
