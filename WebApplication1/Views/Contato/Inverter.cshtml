@@ -8,9 +8,10 @@
 <form asp-controller="Contato" asp-action="Inverter" method="post">
     <div id="mensagem" class="form-group">
         <label for="nome">Verificando Idade da Pessoa</label>
-        <input type="text" asp-for="Palavra" class="form-control" required  placeholder="Insira a Palavra que deseja descobrir o Inverso!">
+        <input type="text" asp-for="Palavra" class="form-control" required placeholder="Insira a Palavra que deseja descobrir o Inverso!">
         @TempData["palindromo"]
         @TempData["msg1"]
+        @TempData["length"]
     </div>
 
     <button type="submit" class="btn btn-primary">Inverter</button>

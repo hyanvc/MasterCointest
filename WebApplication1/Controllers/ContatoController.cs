@@ -89,11 +89,20 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult Inverter(ContatoModel palavras)
         {
+           
+
             string texto = palavras.Palavra;
 
             string texto1 = InverteString(texto);
 
             bool texto2 = checkPalindrome(texto);
+
+            if (texto.Length < 3)
+            {
+                TempData["length"] = "A palavra deve conter pelo menos 3 caracteres.";
+
+                return View();
+            }
 
             if (texto2 == true)
             {
