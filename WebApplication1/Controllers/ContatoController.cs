@@ -89,7 +89,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult Inverter(ContatoModel palavras)
         {
-           
+
 
             string texto = palavras.Palavra;
 
@@ -125,7 +125,7 @@ namespace WebApplication1.Controllers
             int idade = DateTime.Now.Year - contato.DatadeNascimento.Year;
 
 
-            
+
 
             if (DateTime.IsLeapYear(bisext))
             {
@@ -133,28 +133,27 @@ namespace WebApplication1.Controllers
 
 
 
-               if (bisext == DateTime.Today.DayOfYear)
-                TempData["msg"] = "Eba! Hoje é seu Aniversário! e sua idade é : " + idade + " e você nasceu em um ano bissexto!";
-               
-               else
+                if (bisext == DateTime.Today.DayOfYear)
+                    TempData["msg"] = "Eba! Hoje é seu Aniversário! e sua idade é : " + idade + " e você nasceu em um ano bissexto!";
+
+                else
                     TempData["msg"] = "Sua idade é " + idade + " anos e você nasceu em um ano bissexto!";
 
                 return View();
-
-
-
             }
 
             if (contato.DatadeNascimento.DayOfYear == DateTime.Today.DayOfYear)
-                TempData["msg"] = "Eba! Hoje é seu Aniversário!";
-            else
+            {
+                TempData["msg"] = "Eba! Hoje é seu Aniversário! e sua idade é : " + idade;
+                return View();
+            }
 
-            if
-                     (DateTime.Now.DayOfYear < contato.DatadeNascimento.DayOfYear)
+            if (DateTime.Now.DayOfYear < contato.DatadeNascimento.DayOfYear)
             {
                 idade = idade - 1;
-                TempData["msg"] = "Sua idade é " + idade + "anos.";
+                TempData["msg"] = "Sua idade é " + idade + " anos.";
             }
+            TempData["msg"] = "Sua idade é " + idade + " anos.";
 
             return View();
         }
@@ -177,7 +176,7 @@ namespace WebApplication1.Controllers
 
                     Market market = JsonConvert.DeserializeObject<Market>(result);
 
-                    decimal real = decimal.Round( cotacao.Real / market.Currency.Buy, 2);
+                    decimal real = decimal.Round(cotacao.Real / market.Currency.Buy, 2);
 
                     TempData["msg"] = "A cotação atual do Dólar  é : " + market.Currency.Buy + " e  o valor em reais convertido do Dólar  é : " + real;
                 }
