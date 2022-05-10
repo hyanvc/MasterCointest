@@ -69,7 +69,7 @@ namespace WebApplication1.Controllers
             return View(contatos);
         }
 
-        public IActionResult Criar()
+        public IActionResult DescobrirIdade()
         {
             return View();
         }
@@ -117,7 +117,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar(ContatoModel contato)
+        public IActionResult DescobrirIdade(ContatoModel contato)
 
         {
             int bisext = contato.DatadeNascimento.Year;
@@ -134,10 +134,21 @@ namespace WebApplication1.Controllers
 
 
                 if (bisext == DateTime.Today.DayOfYear)
+                {
+
+
                     TempData["msg"] = "Eba! Hoje é seu Aniversário! e sua idade é : " + idade + " e você nasceu em um ano bissexto!";
+                    return View();
+                }
+                if (DateTime.Now.DayOfYear < bisext)
+                {
+                    idade = idade - 1;
+                    TempData["msg"] = "Sua idade é " + idade + " e você nasceu em um ano bissexto!";
+
+                }
 
                 else
-                    TempData["msg"] = "Sua idade é " + idade + " anos e você nasceu em um ano bissexto!";
+                    TempData["msg"] = "Sua idade é " + idade + " e você nasceu em um ano bissexto!";
 
                 return View();
             }
@@ -153,6 +164,7 @@ namespace WebApplication1.Controllers
                 idade = idade - 1;
                 TempData["msg"] = "Sua idade é " + idade + " anos.";
             }
+
             TempData["msg"] = "Sua idade é " + idade + " anos.";
 
             return View();
@@ -191,7 +203,7 @@ namespace WebApplication1.Controllers
 
             if (contato.Name.Contains("mc") || (contato.Name.Contains("mastercoin")))
             {
-                TempData["nome"] = ("Seu Nome de Usuario Nao Pode Conter  mc/mastercoin");
+                TempData["nome"] = ("Seu Nome de usuário não pode contar  mc/mastercoin");
                 return RedirectToAction("CriarUsuario");
             }
 
@@ -212,7 +224,7 @@ namespace WebApplication1.Controllers
             {
 
 
-                TempData["senha"] = ("A senha deve conter, no mínimo, uma letra maiúscula, uma letra minúscula e um número A mesma não pode ter nenhum caractere de pontuação, acentuação ou espaço Além disso, a senha pode ter de 6 a 32 caracteres  ");
+                TempData["senha"] = ("A senha deve conter, no mínimo, uma letra maiúscula, uma letra minúscula, 6 dígitos e um caractere especial.  ");
                 return RedirectToAction("CriarUsuario");
             }
 
