@@ -61,7 +61,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public IActionResult Index1()
+        public IActionResult Clientes()
         {
 
             List<ContatoTable> contatos = _contatoRepositorio.BuscarTodos();
@@ -128,7 +128,7 @@ namespace WebApplication1.Controllers
                 TempData["msg"] = "Eba! Hoje é seu Aniversário! e sua idade é : " + idade + " e você nasceu em um ano bissexto!";
                
                else
-                    TempData["msg"] = "Sua idade é " + idade + "anos.";
+                    TempData["msg"] = "Sua idade é " + idade + " anos e você nasceu em um ano bissexto!";
 
                 return View();
 
@@ -144,9 +144,8 @@ namespace WebApplication1.Controllers
                      (DateTime.Now.DayOfYear < contato.DatadeNascimento.DayOfYear)
             {
                 idade = idade - 1;
-            }
-            else
                 TempData["msg"] = "Sua idade é " + idade + "anos.";
+            }
 
             return View();
         }
@@ -169,7 +168,7 @@ namespace WebApplication1.Controllers
 
                     Market market = JsonConvert.DeserializeObject<Market>(result);
 
-                    decimal real = decimal.Round(cotacao.Real / market.Currency.Buy, 2);
+                    decimal real = decimal.Round( cotacao.Real / market.Currency.Buy, 2);
 
                     TempData["msg"] = "A cotação atual do Dólar  é : " + market.Currency.Buy + " e  o valor em reais convertido do Dólar  é : " + real;
                 }
