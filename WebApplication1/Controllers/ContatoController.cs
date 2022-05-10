@@ -189,7 +189,7 @@ namespace WebApplication1.Controllers
             }
 
             Convert.ToDateTime(contato.DataDeNascimento).ToString("dd/MM/yyyy");
-            Regex rx = new Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{6,32}$");
+            Regex rx = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$");
             Regex rg = new Regex(@"^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$");
             Match matchEmail = rg.Match(contato.Email);
             Match match = rx.Match(contato.Senha);
